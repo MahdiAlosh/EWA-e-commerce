@@ -49,24 +49,44 @@ header{
     z-index: 9999;
 }
 
+/* .popupKorb {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px 30px !important;
+    border: 1px solid #dddddd;
+    box-shadow: 0 25px 50px rgba(7, 20, 35, 0.2);
+    border-radius: 12px;
+    max-width: 500px !important;
+    max-height: 400px !important;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+    margin-right: 10px !important;
+    overflow-y: auto;
+} */
 .popupKorb {
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #ffffff;
-    padding: 20px 30px;
+    padding: 40px 60px; /* Erhöht das Padding für mehr Platz */
     border: 1px solid #dddddd;
     box-shadow: 0 25px 50px rgba(7, 20, 35, 0.2);
     border-radius: 12px;
-    max-width: 400px !important;
+    width: 600px; /* Feste Breite setzen */
+    max-width: 90%; /* Maximalbreite auf 90% des Bildschirms setzen */
+    /* max-height: 400px !important; */ /* Maximale Höhe auf 400px setzen */
     z-index: 1000;
     animation: fadeIn 0.3s ease-in-out;
     margin-right: 10px !important;
-    overflow-y: auto;
-
-    /*filter: blur(4px);*/
+    overflow-y: auto; /* Ermöglicht Scrollen, wenn der Inhalt zu groß wird */
 }
+
+
+
 
 .popupKorbbody{
     max-height: 300px;
@@ -176,6 +196,7 @@ header{
     max-width: 300px;
     border-radius: 5px;
 }
+
 
 .korb-artikel{
     border: 1px solid #dddddd;
