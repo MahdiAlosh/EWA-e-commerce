@@ -39,8 +39,11 @@ export default {
                 return response.json();
             })
             .then((data) => {
+                // console.log(data.tokenisauth);
+                // data.tokenisauth = true;
+                // console.log(data.tokenisauth);
                 if (data.tokenisauth === true) {
-                this.$root.$refs.NavComRef.chadmin();
+                    this.$root.$refs.NavComRef.chadmin();
                 }
             })
             .catch((error) => {

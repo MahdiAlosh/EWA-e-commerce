@@ -43,8 +43,11 @@ export default {
                     this.$root.$refs.KorbComRef.storageLog();
                     this.$root.$refs.LogComRef.storageLog();
                     this.messageLog.msgLogIn = "Login Now";
+                    console.log("data.userRolle");
+                    console.log(data.userRolle);
                     if (data.userRolle === true) {
                         this.$root.$refs.NavComRef.chadmin();
+                        console.log("data.userRolle");
                     }
                 }
             })

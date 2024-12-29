@@ -36,6 +36,18 @@ header{
     background-color: #ffffff;
 }
 
+.product-rating-stars {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 110px;
+    height: auto;
+}
+.product-rating-stars-item{
+    margin-bottom: 8px;
+    width: 110px;
+    height: auto;
+}
+
 .popup-container, .popup-container-v1 {
     position: fixed;
     top: 0;

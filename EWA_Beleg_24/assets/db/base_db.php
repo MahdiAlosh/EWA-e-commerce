@@ -206,19 +206,19 @@ if ($request_data->action == "login") {
             $nameUser = $res['Nutzername'];
             $roleUser = $res['Rolle'];
 
-            if ($roleUser == 1) {
+            if ($roleUser === 1) {
                 $roleUser = true;
             } else {
                 $roleUser = false;
             }
 
-            /* if(isset($_COOKIE['OUserID'])){
-                    $idCookieKorb = $_COOKIE['OUserID'];
-                    $data=array(":NutzerID1"=>$idCookieKorb, ":NutzerID2"=>$idUser);
-                    $query= "UPDATE korb SET NutzerID = :NutzerID2 WHERE NutzerID = :NutzerID1";
-                    $statement=$connect->prepare($query);
-                    $statement->execute($data);
-                } */
+            if (isset($_COOKIE['OUserID'])) {
+                $idCookieKorb = $_COOKIE['OUserID'];
+                $data = array(":NutzerID1" => $idCookieKorb, ":NutzerID2" => $idUser);
+                $query = "UPDATE korb SET NutzerID = :NutzerID2 WHERE NutzerID = :NutzerID1";
+                $statement = $connect->prepare($query);
+                $statement->execute($data);
+            }
 
             $message = "Anmeldung erfolgreich. Hallo $nameUser";
             $msgError = false;
