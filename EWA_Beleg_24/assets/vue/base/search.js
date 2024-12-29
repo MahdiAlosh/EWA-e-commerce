@@ -85,8 +85,8 @@ export default {
                 
                 <div v-if="searchlist.messageSearch !== false">
                     <div class="text-dark mb-2">
-                        <span class="fw-bold btn btn-outline-secondary text-dark me-1" @click="zuPreis">Abnehmen</span>
-                        <span class="fw-bold btn btn-outline-secondary text-dark" @click="abPreis">Zunehmen</span>
+                        <span class="fw-bold btn btn-outline-secondary text-dark me-1" @click="zuPreis">Absteigend</span>
+                        <span class="fw-bold btn btn-outline-secondary text-dark" @click="abPreis">Aufsteigend</span>
                     </div>
                     <div class="container-search-artikel">
                         <article class="border container mb-3" v-for="row in searchlist">
