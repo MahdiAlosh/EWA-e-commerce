@@ -8,20 +8,20 @@ export default {
         };
     },
     methods: {
-        zuPreis(){
+        zuPreis() {
             this.searchlist.sort((a, b) => parseFloat(b.PreisBrutto) - parseFloat(a.PreisBrutto));
             //console.log("zuSort");
         },
-        abPreis(){
+        abPreis() {
             this.searchlist.sort((a, b) => parseFloat(a.PreisBrutto) - parseFloat(b.PreisBrutto));
             //console.log("abSort");
         },
-        callSearchPop(e){
+        callSearchPop(e) {
             e.preventDefault();
             this.showPopSearch(this.searchText);
             this.searchText = "";
         },
-        getSearch(){
+        getSearch() {
             /* axios.post("assets/db/base_db.php",{
                 Produkttitel:this.searchTextItem,
                 action:"getSearch"
@@ -34,33 +34,33 @@ export default {
             fetch("assets/db/base_db.php", {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  Produkttitel: this.searchTextItem,
-                  action: "getSearch",
+                    Produkttitel: this.searchTextItem,
+                    action: "getSearch",
                 }),
             })
-            .then((response) => {
-                if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                this.$root.$refs.SearchComRef.searchlist = data;
-                //console.log(this.searchlist);
-            })
-            .catch((error) => {
-                this.$root.$refs.NavComRef.msg(error.message);
-            });
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    this.$root.$refs.SearchComRef.searchlist = data;
+                    //console.log(this.searchlist);
+                })
+                .catch((error) => {
+                    this.$root.$refs.NavComRef.msg(error.message);
+                });
         },
-        showPopSearch(text){
+        showPopSearch(text) {
             this.showSearch = true;
             this.searchTextItem = text;
             this.getSearch();
         },
-        hidePopSearch(){
+        hidePopSearch() {
             this.showSearch = false;
         },
     },
@@ -93,7 +93,7 @@ export default {
                             <router-link :to="'/item/' + row.ProduktID" class="text-decoration-none d-flex">
                                 <div class="col-2">
                                     <div class="main-img-container">
-                                        <img :src="'./assets/img/item/' + row.LinkGrafikdatei" class="main-img" :alt="row.Produkttitel">
+                                        <img :src="'./assets/img/item/' + row.BildURL" class="main-img" :alt="row.Produkttitel">
                                     </div>
                                 </div>
                                 <div class="ms-2">
