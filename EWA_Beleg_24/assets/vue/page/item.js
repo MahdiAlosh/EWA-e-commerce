@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             itemId: null,
-            items:{
+            items: {
                 ProduktID: "",
                 Produktcode: "",
                 Produkttitel: "Loading..",
@@ -13,22 +13,22 @@ export default {
                 BewertungCount: "0",
                 BildURL: ""
             },
-            buyForm:{
-                id:"",
-                menge:"1"
+            buyForm: {
+                id: "",
+                menge: "1"
             }
         };
     },
     watch: {
         '$route.params.value': 'chLink'
     },
-    methods:{
-        chLink(){
+    methods: {
+        chLink() {
             this.getItem();
             this.$root.$refs.SearchComRef.hidePopSearch();
             this.$root.$refs.KorbComRef.DisplayKorb.korbDisplay = false;
         },
-        getItem(){
+        getItem() {
             this.itemId = this.$route.params.value;
             /* axios.post("assets/db/item_db.php",{
                 ProduktID:this.itemId,
@@ -42,117 +42,117 @@ export default {
             fetch("assets/db/item_db.php", {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  ProduktID: this.itemId,
-                  action: "getItem",
+                    ProduktID: this.itemId,
+                    action: "getItem",
                 }),
             })
-            .then((response) => {
-                if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                this.items = data;
-                document.title = this.items.Produkttitel;
-                //document.description = this.items.Kurzinhalt;
-            })
-            .catch((error) => {
-                this.$root.$refs.NavComRef.msg(error.message);
-            });
-              
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    this.items = data;
+                    document.title = this.items.Produkttitel;
+                    //document.description = this.items.Kurzinhalt;
+                })
+                .catch((error) => {
+                    this.$root.$refs.NavComRef.msg(error.message);
+                });
+
         },
-        getIdAU(){
+        getIdAU() {
             return fetch("assets/db/base_db.php", {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  action: "getIdOU",
+                    action: "getIdOU",
                 }),
             })
-            .then((response) => {
-                if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                const idOU = data.messageIdOU;
-                localStorage.setItem('tokenOU', idOU);
-                //console.log("set " + localStorage.getItem('tokenOU')); // testt
-                return idOU;
-            })
-            .catch((error) => {
-                this.$root.$refs.NavComRef.msg(error.message);
-                return Promise.reject('error');
-            });              
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const idOU = data.messageIdOU;
+                    localStorage.setItem('tokenOU', idOU);
+                    //console.log("set " + localStorage.getItem('tokenOU')); // testt
+                    return idOU;
+                })
+                .catch((error) => {
+                    this.$root.$refs.NavComRef.msg(error.message);
+                    return Promise.reject('error');
+                });
         },
-        async submitBuy(e){
+        async submitBuy(e) {
             e.preventDefault();
             let fsmenge = this.$root.$refs.KorbComRef.getItemMenge(this.items.ProduktID);
             let smenge;
             console.log(fsmenge);
             console.log(this.items.Lagerbestand);
-            smenge = parseInt(this.buyForm.menge-1) + parseInt(fsmenge);
-            console.log("sm: "+smenge);
+            smenge = parseInt(this.buyForm.menge - 1) + parseInt(fsmenge);
+            console.log("sm: " + smenge);
             if (smenge >= this.items.Lagerbestand) {
                 console.log("no");
-                this.$root.$refs.NavComRef.msg("Maximum Menge: " + this.items.Lagerbestand + ", Sie können noch "+ parseInt(this.items.Lagerbestand - fsmenge) +" Stück im Warenkorb hinzufügen.");
-            }else{
+                this.$root.$refs.NavComRef.msg("Maximum Menge: " + this.items.Lagerbestand + ", Sie können noch " + parseInt(this.items.Lagerbestand - fsmenge) + " Stück im Warenkorb hinzufügen.");
+            } else {
                 console.log("yes");
                 var token = null;
                 if (localStorage.getItem('tokenU')) {
                     token = localStorage.getItem('tokenU');
                     //console.log(token);
-                }else if (localStorage.getItem('tokenOU')){
+                } else if (localStorage.getItem('tokenOU')) {
                     token = localStorage.getItem('tokenOU');
                     //console.log(token);
-                }else{
+                } else {
                     token = await this.getIdAU();
                     //console.log("todb1 "+token);
                 }
-                
+
                 //console.log("todb "+token);
 
                 fetch("assets/db/item_db.php", {
                     method: "POST",
                     headers: {
-                    "Content-Type": "application/json",
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                    NutzerID: token,
-                    ProduktID: this.itemId,
-                    Menge: this.buyForm.menge,
-                    action: "buyItem",
+                        NutzerID: token,
+                        ProduktID: this.itemId,
+                        Menge: this.buyForm.menge,
+                        action: "buyItem",
                     }),
                 })
-                .then((response) => {
-                    if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    this.buyForm.menge = "1";
-                    this.$root.$refs.NavComRef.msg(data.msgBuyItem);
-                    this.$root.$refs.KorbComRef.getKorb();
-                })
-                .catch((error) => {
-                    this.$root.$refs.NavComRef.msg(error.message);
-                });       
-            }       
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        this.buyForm.menge = "1";
+                        this.$root.$refs.NavComRef.msg(data.msgBuyItem);
+                        this.$root.$refs.KorbComRef.getKorb();
+                    })
+                    .catch((error) => {
+                        this.$root.$refs.NavComRef.msg(error.message);
+                    });
+            }
         }
     },
     mounted() {
         //this.itemId = this.$el.getAttribute('data-itemid');
         this.getItem();
         this.$root.$refs.SearchComRef.hidePopSearch();
-        
+
     },
     template: `
     
@@ -172,7 +172,15 @@ export default {
 						<div class="text-secondary">
 							<span>{{items.Produktcode}}</span>
 							<span class="px-1">-</span>
-							<span>{{items.BewertungStars}} Sterne </span>
+							
+                            <!--
+                            <span>{{items.BewertungStars}} Sterne </span>
+                            -->
+
+                            <img class="product-rating-stars-item ms-2" 
+                                :src="'./assets/img/ratings/rating-' + items.BewertungStars * 10 + '.png'" 
+                                alt="Bewertung">
+
 							<span class="px-1">-</span>
 							<span>{{items.BewertungCount}} Bewertungen </span>
 						</div>
