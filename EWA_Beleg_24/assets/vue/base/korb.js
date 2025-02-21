@@ -19,10 +19,10 @@ export default {
             let nextstp = false;
             let iduser;
             
-            if(localStorage.getItem('tokenU')){
+            if(localStorage.getItem('tokenU')){ // für user, der angemeldet bzw registiert
                 nextstp = true;
                 iduser = localStorage.getItem('tokenU');
-            }else if(localStorage.getItem('tokenOU')){
+            }else if(localStorage.getItem('tokenOU')){ // für user, der als Gast gekennzeichnet
                 nextstp = true;
                 iduser = localStorage.getItem('tokenOU');
             }
@@ -313,6 +313,7 @@ export default {
                 <span class="btn" @click="disPopupKorb"><i class="fa-solid fa-x"></i></span>
                 </div>
                 
+                <!-- probiere ohne den Teil ||.... -->
                 <div v-if="korblist.messageKorb !== false || DisplayKorb.KorbSchritt4 !== false">
                 
                     <!-- Display 1 -->
@@ -350,13 +351,14 @@ export default {
                             <span class="text-secondary fw-bold">{{ calculateTotal() }}€</span>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button v-if="!isTokenUKorb" @click="KDis2" class="btn btn-success">Zur Kasse <i class="fa-solid fa-chevron-right"></i></button>
+                            <button v-if="!isTokenUKorb" @click="KDis2" class="btn btn-success">Zur Kasse <i class="fa-solid fa-chevron-right"></i></button> 
+                            <!--"!isTokenUKorb" muss false sein-->
                             <button v-else @click="KDis3" class="btn btn-success">Zur Kasse <i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
 
                     <!-- Display 2 -->
-                    <div class="container" v-if="DisplayKorb.KorbSchritt2 !== false && !isTokenUKorb">
+                    <div class="container" v-if="DisplayKorb.KorbSchritt2 !== false && !isTokenUKorb"> <!--"!isTokenUKorb" muss false sein-->
                         <div class="py-4">
                         <div>
                             <button class="btn btn-primary w-100 text-nowrap" @click="KDis3">Als Gast bestellen</button>
@@ -405,7 +407,9 @@ export default {
                         </form>
                         <div class="mt-3">
                         <button v-if="!isTokenUKorb" class="me-1 btn btn-warning" @click="KDis2"><i class="fa-solid fa-chevron-left"></i> Back</button>
-                        <button v-else class="me-1 btn btn-warning" @click="KDis1"><i class="fa-solid fa-chevron-left"></i> Zurück</button>
+                        <!--Back für Anmelden-->
+                        <button class="me-1 btn btn-warning" @click="KDis1"><i class="fa-solid fa-chevron-left"></i> Zurück</button>
+                        <!--Zurück für Warenkorb-->
                         </div>
                     </div>
 
@@ -446,7 +450,7 @@ export default {
                             <article class="mb-3 d-flex" v-for="(row, index) in historyBestellunglist">
                             <div class="col-3">
                                 <div class="main-img-container">
-                                <img :src="'./assets/img/item/' + row.LinkGrafikdatei" class="main-img" :alt="row.Produkttitel">
+                                <img :src="'./assets/img/item/' + row.BildURL" class="main-img" :alt="row.Produkttitel">
                                 </div>
                             </div>
                             <div class="col-9">
