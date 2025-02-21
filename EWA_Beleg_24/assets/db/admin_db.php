@@ -182,6 +182,13 @@ if ($request_data->action == "deleteArtikel") {
     $query = "DELETE FROM gift_shop WHERE ProduktID = $request_data->ProduktID";
     $statement = $connect->prepare($query);
     $statement->execute();
+    
+    /* um SQL-Injection zu vermeiden
+    $query = "DELETE FROM gift_shop WHERE ProduktID = :ProduktID";
+    $statement = $connect->prepare($query);
+    $statement->execute(array(':ProduktID' => $request_data->ProduktID));
+    */
+
     $output = array("message" => "Delete Complete");
     echo json_encode($output);
 }

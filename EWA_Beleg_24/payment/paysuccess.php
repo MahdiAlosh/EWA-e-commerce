@@ -70,7 +70,7 @@ try {
 }
 
 // HTML-Ausgabe
-echo '
+$body = '
 <div class="container mt-3">
     <div>
         ' . $bodyres . '

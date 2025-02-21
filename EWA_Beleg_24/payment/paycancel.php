@@ -16,8 +16,8 @@ $body = '
         ' . $bodyres . '
     </div>
     <div class="d-flex justify-content-center">
-        <a href="/EWA_BELEG_24/" class="btn btn-primary w-50 mt-3 mb-4">Zurück zur Startseite</a>
-        <a href="/EWA_BELEG_24/korb.php" class="btn btn-secondary w-50 mt-3 mb-4 ms-2">Zurück zum Warenkorb</a>
+        <a href="/EWA-e-commerce-git/EWA_Beleg_24/" class="btn btn-primary w-50 mt-3 mb-4">Zurück zur Startseite</a>
+        <a href="/EWA-e-commerce-git/EWA_Beleg_24/korb.php" class="btn btn-secondary w-50 mt-3 mb-4 ms-2">Zurück zum Warenkorb</a>
     </div>
 </div>
 

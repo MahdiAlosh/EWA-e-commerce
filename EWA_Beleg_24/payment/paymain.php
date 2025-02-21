@@ -32,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
             }, $books), // $books aus pay_db.php
             'mode' => 'payment',
-            'success_url' => $linkDom . '/payment/paysuccess.php?res=1&uID=' . urlencode($idCookie) . '&session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url'  => $linkDom . '/payment/paycancel.php?res=0&uID=' . urlencode($idCookie) . '&session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => $linkDom . '?res=1&uID=' . urlencode($idCookie) . '&session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'  => $linkDom . '?res=0&uID=' . urlencode($idCookie) . '&session_id={CHECKOUT_SESSION_ID}',
         ]);
     } catch (\Stripe\Exception\ApiErrorException $e) {
         die("Fehler beim Erstellen der Stripe-Session: " . $e->getMessage());
