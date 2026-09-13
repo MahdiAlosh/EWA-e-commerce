@@ -6,6 +6,9 @@ $domain = $protocol . $_SERVER['HTTP_HOST'];
 
 $linkDom = $domain . $request_uri;
 
+// Basis-URL ohne Script-/Verzeichnisnamen (für korrekte Bild-URLs)
+$baseUrl = $domain . rtrim(dirname($request_uri), '/') . '/';
+
 // Datenbankverbindung einbinden
 include 'assets/db/conn.php';
 
@@ -42,7 +45,7 @@ if ($res) {
             $item = array(
                 'name' => $row['Produkttitel'], // Produktname
                 'description' => 'Lagerbestand: ' . $row['Lagerbestand'], // Beschreibung (optional)
-                'images' => [$linkDom . '/assets/img/' . $row['BildURL']], // Bild-URL
+                'images' => [$baseUrl . 'assets/img/item/' . $row['BildURL']], // Bild-URL
                 'amount' => $row['PreisBrutto'] * 100, // Preis in Cent
                 'currency' => 'eur', // Währung
                 'quantity' => $row['Menge'] // Anzahl im Warenkorb

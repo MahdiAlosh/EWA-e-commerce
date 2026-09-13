@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require('payment/api/init.php'); // Stripe-Bibliothek einbinden
     include 'payment/pay_db.php'; // Warenkorb-Daten laden
 
-    \Stripe\Stripe::setApiKey('sk_test_51QefC2FTMsLUckIlRU7gp4bj6iq90RppXH7Zctpnaqiphqr2EsDSFcwmcD9UoM1sfYTyuw9TksVyxfbhR6JUE3Th00bT0sCO0C'); // Ihr Secret Key
-    $public_key_for_js = "pk_test_51QefC2FTMsLUckIlborOV8IqzOFWjoasQn4qngwbGD0rm9f1uLXoDmztzLFSUtkJbwOfuLqroEQlul8JbGMkev7d00T4R7X1d2";
+    \Stripe\Stripe::setApiKey('REMOVED'); // Ihr Secret Key
+    $public_key_for_js = 'pk_test_51UFDYqGateq4FChheFtcqiCvGwYUZ5czycgdFIhpEFrRag8QCYifLfWRyE4a0pl4V135nvFO1xgH5yPLhGNKh4Sf00Os35XXZd';
 
     try {
         // Stripe-Session erstellen
