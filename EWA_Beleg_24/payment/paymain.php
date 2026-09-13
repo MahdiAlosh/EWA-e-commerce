@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require('payment/api/init.php'); // Stripe-Bibliothek einbinden
     include 'payment/pay_db.php'; // Warenkorb-Daten laden
 
-    \Stripe\Stripe::setApiKey('REMOVED'); // Ihr Secret Key
+    \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY')); // Ihr Secret Key
     $public_key_for_js = 'pk_test_51UFDYqGateq4FChheFtcqiCvGwYUZ5czycgdFIhpEFrRag8QCYifLfWRyE4a0pl4V135nvFO1xgH5yPLhGNKh4Sf00Os35XXZd';
 
     try {
